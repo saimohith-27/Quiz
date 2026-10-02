@@ -1,0 +1,537 @@
+{% extends "base.html" %}
+{% block title %}Home | AI Quiz Platform{% endblock %}
+{% block content %}
+
+<!-- ================= HERO ================= -->
+<section class="py-4 py-lg-5">
+  <div class="card border-0 shadow-lg overflow-hidden">
+    <div class="card-body p-4 p-md-5">
+
+      <div class="row align-items-center g-5">
+
+        <!-- Hero Text -->
+        <div class="col-lg-7">
+
+          <span class="badge text-bg-primary rounded-pill px-3 py-2 mb-3">
+            <i class="bi bi-stars me-1"></i>
+            AI-Powered Assessment
+          </span>
+
+          <h1 class="display-4 fw-bold text-dark lh-sm mb-3">
+            AI Quiz &
+            <span class="text-primary">Assessment</span>
+            Platform
+          </h1>
+
+          <p class="lead text-secondary mb-4">
+            A professional CBT-style examination platform that uses AI
+            to generate, validate, conduct, and analyze assessments.
+          </p>
+
+          <div class="d-flex flex-column flex-sm-row gap-3">
+
+            <a
+              href="{{ url_for('main.candidate') }}"
+              class="btn btn-primary btn-lg px-4 shadow-sm"
+            >
+              <i class="bi bi-play-circle-fill me-2"></i>
+              Start Examination
+            </a>
+
+            <a
+              href="#features"
+              class="btn btn-outline-secondary btn-lg px-4"
+            >
+              <i class="bi bi-grid-3x3-gap me-2"></i>
+              Explore Features
+            </a>
+
+          </div>
+
+          <div class="d-flex flex-wrap gap-4 mt-4 pt-3 border-top">
+
+            <div>
+              <div class="fw-bold fs-5">
+                <i class="bi bi-robot text-primary me-1"></i>
+                AI
+              </div>
+              <small class="text-muted">Question Generation</small>
+            </div>
+
+            <div>
+              <div class="fw-bold fs-5">
+                <i class="bi bi-shield-check text-success me-1"></i>
+                Validated
+              </div>
+              <small class="text-muted">Structured Questions</small>
+            </div>
+
+            <div>
+              <div class="fw-bold fs-5">
+                <i class="bi bi-bar-chart-line text-warning me-1"></i>
+                Analytics
+              </div>
+              <small class="text-muted">Detailed Results</small>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Hero Visual -->
+        <div class="col-lg-5">
+
+          <div class="bg-dark rounded-4 p-4 shadow-sm">
+
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <div>
+                <small class="text-secondary">LIVE ASSESSMENT</small>
+                <div class="text-white fw-semibold">
+                  Examination Dashboard
+                </div>
+              </div>
+
+              <span class="badge text-bg-success rounded-pill">
+                Active
+              </span>
+            </div>
+
+            <div class="bg-white rounded-3 p-3 mb-3">
+
+              <div class="d-flex justify-content-between mb-2">
+                <span class="fw-semibold small">Question Progress</span>
+                <span class="text-primary fw-semibold small">7 / 20</span>
+              </div>
+
+              <div class="progress" style="height: 8px;">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  style="width: 35%;"
+                ></div>
+              </div>
+
+            </div>
+
+            <div class="row g-3">
+
+              <div class="col-6">
+                <div class="bg-secondary bg-opacity-10 rounded-3 p-3">
+                  <div class="text-secondary small">Answered</div>
+                  <div class="fs-4 fw-bold text-white">5</div>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="bg-secondary bg-opacity-10 rounded-3 p-3">
+                  <div class="text-secondary small">Remaining</div>
+                  <div class="fs-4 fw-bold text-white">13</div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="mt-3 p-3 rounded-3 bg-primary bg-opacity-10">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-clock-history text-primary"></i>
+                <span class="text-white small">
+                  Timer-based examination
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="py-4" id="how-it-works">
+
+  <div class="text-center mb-5">
+
+    <span class="badge text-bg-light border rounded-pill px-3 py-2 mb-2">
+      Simple workflow
+    </span>
+
+    <h2 class="fw-bold">
+      How It Works
+    </h2>
+
+    <p class="text-muted mb-0">
+      From candidate registration to performance analysis.
+    </p>
+
+  </div>
+
+
+  <div class="row g-4">
+
+    <!-- Step 1 -->
+    <div class="col-md-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div
+            class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-4"
+            style="width: 56px; height: 56px;"
+          >
+            <i class="bi bi-person-vcard fs-4"></i>
+          </div>
+
+          <div class="text-primary fw-semibold small mb-2">
+            STEP 01
+          </div>
+
+          <h4 class="fw-bold">
+            Register Candidate
+          </h4>
+
+          <p class="text-muted mb-0">
+            Enter candidate details and validate the student information
+            before beginning the examination.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Step 2 -->
+    <div class="col-md-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div
+            class="d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-circle mb-4"
+            style="width: 56px; height: 56px;"
+          >
+            <i class="bi bi-sliders2 fs-4"></i>
+          </div>
+
+          <div class="text-success fw-semibold small mb-2">
+            STEP 02
+          </div>
+
+          <h4 class="fw-bold">
+            Configure Exam
+          </h4>
+
+          <p class="text-muted mb-0">
+            Choose the subject, difficulty, question count, time limit,
+            categories, and question types.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Step 3 -->
+    <div class="col-md-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div
+            class="d-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning rounded-circle mb-4"
+            style="width: 56px; height: 56px;"
+          >
+            <i class="bi bi-graph-up-arrow fs-4"></i>
+          </div>
+
+          <div class="text-warning fw-semibold small mb-2">
+            STEP 03
+          </div>
+
+          <h4 class="fw-bold">
+            Analyze Results
+          </h4>
+
+          <p class="text-muted mb-0">
+            Review answers, scores, category performance, time usage,
+            and personalized performance insights.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+<section class="py-5" id="features">
+
+  <div class="text-center mb-5">
+
+    <span class="badge text-bg-primary rounded-pill px-3 py-2 mb-2">
+      Platform capabilities
+    </span>
+
+    <h2 class="fw-bold">
+      Everything You Need for an AI-Based Exam
+    </h2>
+
+    <p class="text-muted mb-0">
+      Built to provide a complete examination experience.
+    </p>
+
+  </div>
+
+
+  <div class="row g-4">
+
+    <!-- Feature 1 -->
+    <div class="col-md-6 col-lg-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-3"
+              style="width: 48px; height: 48px;"
+            >
+              <i class="bi bi-stars fs-5"></i>
+            </div>
+
+            <h5 class="fw-bold mb-0">
+              AI Question Generation
+            </h5>
+
+          </div>
+
+          <p class="text-muted mb-0">
+            Generate examination questions dynamically using Gemini-based
+            AI generation.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Feature 2 -->
+    <div class="col-md-6 col-lg-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-success bg-opacity-10 text-success rounded-3"
+              style="width: 48px; height: 48px;"
+            >
+              <i class="bi bi-patch-check fs-5"></i>
+            </div>
+
+            <h5 class="fw-bold mb-0">
+              Pydantic Validation
+            </h5>
+
+          </div>
+
+          <p class="text-muted mb-0">
+            Validate generated question structures before they enter
+            the examination workflow.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Feature 3 -->
+    <div class="col-md-6 col-lg-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning rounded-3"
+              style="width: 48px; height: 48px;"
+            >
+              <i class="bi bi-stopwatch fs-5"></i>
+            </div>
+
+            <h5 class="fw-bold mb-0">
+              Timed Examination
+            </h5>
+
+          </div>
+
+          <p class="text-muted mb-0">
+            Conduct structured examinations with a configurable countdown
+            and question navigation.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Feature 4 -->
+    <div class="col-md-6 col-lg-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-info bg-opacity-10 text-info rounded-3"
+              style="width: 48px; height: 48px;"
+            >
+              <i class="bi bi-database-check fs-5"></i>
+            </div>
+
+            <h5 class="fw-bold mb-0">
+              Session-Based Attempt
+            </h5>
+
+          </div>
+
+          <p class="text-muted mb-0">
+            Maintain the active examination state through the application's
+            session-based workflow.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Feature 5 -->
+    <div class="col-md-6 col-lg-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-danger bg-opacity-10 text-danger rounded-3"
+              style="width: 48px; height: 48px;"
+            >
+              <i class="bi bi-check2-square fs-5"></i>
+            </div>
+
+            <h5 class="fw-bold mb-0">
+              Partial Scoring
+            </h5>
+
+          </div>
+
+          <p class="text-muted mb-0">
+            Support meaningful scoring for questions where partial credit
+            is applicable.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Feature 6 -->
+    <div class="col-md-6 col-lg-4">
+
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+
+          <div class="d-flex align-items-center gap-3 mb-3">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-dark bg-opacity-10 text-dark rounded-3"
+              style="width: 48px; height: 48px;"
+            >
+              <i class="bi bi-bar-chart-line fs-5"></i>
+            </div>
+
+            <h5 class="fw-bold mb-0">
+              Performance Analytics
+            </h5>
+
+          </div>
+
+          <p class="text-muted mb-0">
+            Visualize results through charts covering answer status,
+            categories, and time performance.
+          </p>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+<section class="py-4 pb-5">
+
+  <div class="card border-0 bg-primary text-white shadow-lg overflow-hidden">
+
+    <div class="card-body p-4 p-md-5">
+
+      <div class="row align-items-center g-4">
+
+        <div class="col-lg-8">
+
+          <h3 class="fw-bold mb-2">
+            Ready to begin your examination?
+          </h3>
+
+          <p class="mb-0 text-white-50">
+            Enter your candidate details and create your AI-powered
+            assessment.
+          </p>
+
+        </div>
+
+        <div class="col-lg-4 text-lg-end">
+
+          <a
+            href="{{ url_for('main.candidate') }}"
+            class="btn btn-light btn-lg px-4 fw-semibold"
+          >
+            Start Now
+            <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+{% endblock %}

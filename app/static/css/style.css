@@ -1,0 +1,65 @@
+.app-body {
+  background: linear-gradient(180deg, #f8fbff 0%, #f5f7fb 100%);
+  color: #1f2937;
+}
+
+.app-navbar {
+  background: linear-gradient(90deg, #111827, #1f3b8f);
+}
+
+.app-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+  color: #ffffff;
+}
+
+.app-content {
+  margin-top: 1.5rem;
+}
+
+.hero-card {
+  background: radial-gradient(circle at top right, #dbeafe 0%, #eff6ff 40%, #ffffff 100%);
+  border: 1px solid #dbeafe;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.card {
+  border-radius: 0.85rem;
+}
+
+.btn {
+  border-radius: 0.65rem;
+  font-weight: 500;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0.65rem;
+}
+
+.question-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.timer-pill {
+  min-width: 86px;
+  display: inline-block;
+  text-align: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #1d4ed8;
+}
+
+.review-accordion .accordion-item {
+  border: 0;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}

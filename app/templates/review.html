@@ -1,0 +1,438 @@
+{% extends 'base.html' %}
+
+{% block title %}Review | AI Quiz Platform{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     PAGE HEADER
+========================================================= -->
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+
+  <div>
+
+    <span class="badge text-bg-primary rounded-pill px-3 py-2 mb-2">
+      <i class="bi bi-journal-check me-1"></i>
+      Answer Review
+    </span>
+
+    <h1 class="fw-bold mb-1">
+      Question Review
+    </h1>
+
+    <p class="text-muted mb-0">
+      Review your answers, correct answers, marks, and explanations.
+    </p>
+
+  </div>
+
+
+  <a
+    href="{{ url_for('result.view_result') }}"
+    class="btn btn-outline-primary"
+  >
+    <i class="bi bi-arrow-left me-2"></i>
+    Back to Results
+  </a>
+
+</div>
+
+
+<!-- =========================================================
+     FILTERS
+========================================================= -->
+<div class="card border-0 shadow-sm mb-4">
+
+  <div class="card-body p-3 p-md-4">
+
+    <div class="d-flex flex-column flex-lg-row justify-content-between gap-3">
+
+      <div>
+
+        <div class="small text-muted mb-1">
+          Filter Questions
+        </div>
+
+        <div class="fw-semibold">
+          Showing:
+          <span class="text-primary">
+            {{ current_filter }}
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="d-flex flex-wrap gap-2">
+
+        <a
+          class="btn btn-sm {% if current_filter == 'ALL' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+          href="{{ url_for('result.set_review_filter', status='ALL') }}"
+        >
+          <i class="bi bi-grid me-1"></i>
+          All
+        </a>
+
+
+        <a
+          class="btn btn-sm {% if current_filter == 'CORRECT' %}btn-success{% else %}btn-outline-success{% endif %}"
+          href="{{ url_for('result.set_review_filter', status='CORRECT') }}"
+        >
+          <i class="bi bi-check-circle me-1"></i>
+          Correct
+        </a>
+
+
+        <a
+          class="btn btn-sm {% if current_filter == 'INCORRECT' %}btn-danger{% else %}btn-outline-danger{% endif %}"
+          href="{{ url_for('result.set_review_filter', status='INCORRECT') }}"
+        >
+          <i class="bi bi-x-circle me-1"></i>
+          Incorrect
+        </a>
+
+
+        <a
+          class="btn btn-sm {% if current_filter == 'PARTIALLY_CORRECT' %}btn-warning{% else %}btn-outline-warning{% endif %}"
+          href="{{ url_for('result.set_review_filter', status='PARTIALLY_CORRECT') }}"
+        >
+          <i class="bi bi-circle-half me-1"></i>
+          Partial
+        </a>
+
+
+        <a
+          class="btn btn-sm {% if current_filter == 'UNANSWERED' %}btn-secondary{% else %}btn-outline-secondary{% endif %}"
+          href="{{ url_for('result.set_review_filter', status='UNANSWERED') }}"
+        >
+          <i class="bi bi-dash-circle me-1"></i>
+          Unanswered
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     QUESTION ACCORDION
+========================================================= -->
+<div
+  class="accordion shadow-sm"
+  id="reviewAcc"
+>
+
+{% for a in answers %}
+
+  <div class="accordion-item border-0 mb-3 rounded-3 overflow-hidden shadow-sm">
+
+    <!-- Question Header -->
+    <h2 class="accordion-header">
+
+      <button
+        class="accordion-button collapsed fw-semibold py-3"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#q{{ loop.index }}"
+        aria-expanded="false"
+        aria-controls="q{{ loop.index }}"
+      >
+
+        <div class="d-flex align-items-center gap-3 w-100 me-2">
+
+          <!-- Question number -->
+          <span
+            class="badge rounded-pill
+            {% if a.status == 'CORRECT' %}
+              text-bg-success
+            {% elif a.status == 'INCORRECT' %}
+              text-bg-danger
+            {% elif a.status == 'PARTIALLY_CORRECT' %}
+              text-bg-warning
+            {% else %}
+              text-bg-secondary
+            {% endif %}
+            px-3 py-2"
+          >
+            Q{{ loop.index }}
+          </span>
+
+
+          <!-- Question ID -->
+          <span class="text-truncate">
+            {{ a.question.id }}
+          </span>
+
+
+          <!-- Status -->
+          <span
+            class="badge ms-auto
+            {% if a.status == 'CORRECT' %}
+              text-bg-success
+            {% elif a.status == 'INCORRECT' %}
+              text-bg-danger
+            {% elif a.status == 'PARTIALLY_CORRECT' %}
+              text-bg-warning
+            {% else %}
+              text-bg-secondary
+            {% endif %}"
+          >
+            {{ a.status or 'UNANSWERED' }}
+          </span>
+
+        </div>
+
+      </button>
+
+    </h2>
+
+
+    <!-- Question Body -->
+    <div
+      id="q{{ loop.index }}"
+      class="accordion-collapse collapse"
+      data-bs-parent="#reviewAcc"
+    >
+
+      <div class="accordion-body p-4">
+
+
+        <!-- Question -->
+        <div class="mb-4">
+
+          <div class="small text-uppercase fw-semibold text-muted mb-2">
+            <i class="bi bi-question-circle me-1"></i>
+            Question
+          </div>
+
+          <div class="bg-light rounded-3 p-4 fs-5">
+            {{ a.question.question }}
+          </div>
+
+        </div>
+
+
+        <!-- Answers -->
+        <div class="row g-3 mb-4">
+
+          <!-- Your Answer -->
+          <div class="col-md-6">
+
+            <div
+              class="h-100 border rounded-3 p-4
+              {% if a.status == 'CORRECT' %}
+                border-success
+              {% elif a.status == 'INCORRECT' %}
+                border-danger
+              {% elif a.status == 'PARTIALLY_CORRECT' %}
+                border-warning
+              {% endif %}"
+            >
+
+              <div class="small text-muted mb-2">
+                <i class="bi bi-person-check me-1"></i>
+                Your Answer
+              </div>
+
+              <div class="fw-semibold">
+
+                {% if a.selected_answer %}
+                  {{ a.selected_answer }}
+                {% else %}
+                  <span class="text-muted fst-italic">
+                    Not answered
+                  </span>
+                {% endif %}
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Correct Answer -->
+          <div class="col-md-6">
+
+            <div class="h-100 border border-success rounded-3 p-4">
+
+              <div class="small text-muted mb-2">
+                <i class="bi bi-check-circle me-1 text-success"></i>
+                Correct Answer
+              </div>
+
+              <div class="fw-semibold text-success">
+
+                {% if a.question.type == 'multiple_choice' %}
+                  {{ a.question.correct_answers }}
+                {% else %}
+                  {{ a.question.correct_answer }}
+                {% endif %}
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Result Information -->
+        <div class="row g-3 mb-4">
+
+          <!-- Status -->
+          <div class="col-sm-6 col-lg-4">
+
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="small text-muted mb-1">
+                Status
+              </div>
+
+              <div class="fw-bold">
+
+                {% if a.status == 'CORRECT' %}
+                  <span class="text-success">
+                    <i class="bi bi-check-circle-fill me-1"></i>
+                    Correct
+                  </span>
+
+                {% elif a.status == 'INCORRECT' %}
+                  <span class="text-danger">
+                    <i class="bi bi-x-circle-fill me-1"></i>
+                    Incorrect
+                  </span>
+
+                {% elif a.status == 'PARTIALLY_CORRECT' %}
+                  <span class="text-warning">
+                    <i class="bi bi-circle-half me-1"></i>
+                    Partially Correct
+                  </span>
+
+                {% else %}
+                  <span class="text-secondary">
+                    <i class="bi bi-dash-circle-fill me-1"></i>
+                    Unanswered
+                  </span>
+                {% endif %}
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Marks -->
+          <div class="col-sm-6 col-lg-4">
+
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="small text-muted mb-1">
+                Marks
+              </div>
+
+              <div class="fw-bold">
+                {{ a.marks_awarded or 0 }}
+                <span class="text-muted fw-normal">
+                  / {{ a.question.marks }}
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Type -->
+          <div class="col-sm-6 col-lg-4">
+
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="small text-muted mb-1">
+                Question Type
+              </div>
+
+              <div class="fw-semibold">
+                {{ a.question.type }}
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Explanation -->
+        <div class="border rounded-3 overflow-hidden">
+
+          <div class="bg-primary bg-opacity-10 px-4 py-3">
+
+            <div class="fw-bold text-primary">
+              <i class="bi bi-lightbulb-fill me-2"></i>
+              Explanation
+            </div>
+
+          </div>
+
+          <div class="p-4">
+
+            {% if a.question.explanation %}
+
+              <p class="mb-0 text-secondary">
+                {{ a.question.explanation }}
+              </p>
+
+            {% else %}
+
+              <p class="mb-0 text-muted fst-italic">
+                No explanation provided for this question.
+              </p>
+
+            {% endif %}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+{% endfor %}
+
+</div>
+
+
+<!-- =========================================================
+     BOTTOM NAVIGATION
+========================================================= -->
+<div class="d-flex justify-content-between align-items-center mt-4 mb-3">
+
+  <a
+    href="{{ url_for('result.view_result') }}"
+    class="btn btn-outline-secondary"
+  >
+    <i class="bi bi-arrow-left me-2"></i>
+    Back to Results
+  </a>
+
+  <a
+    href="{{ url_for('result.set_review_filter', status='ALL') }}"
+    class="btn btn-primary"
+  >
+    <i class="bi bi-grid me-2"></i>
+    View All Questions
+  </a>
+
+</div>
+
+{% endblock %}

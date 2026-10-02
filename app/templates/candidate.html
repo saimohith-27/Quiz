@@ -1,0 +1,549 @@
+{% extends "base.html" %}
+
+{% block title %}Candidate Registration | AI Quiz Platform{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-12 col-xl-10">
+
+    <!-- ================= PAGE HEADER ================= -->
+    <div class="text-center mb-4 mb-lg-5">
+
+      <span class="badge text-bg-primary rounded-pill px-3 py-2 mb-3">
+        <i class="bi bi-person-badge me-1"></i>
+        Candidate Registration
+      </span>
+
+      <h1 class="fw-bold mb-2">
+        Enter Candidate Details
+      </h1>
+
+      <p class="text-muted mb-0">
+        Provide your details to continue to the examination.
+      </p>
+
+    </div>
+
+
+    {% if decoded_info and decoded_info.valid %}
+
+    <!-- ========================================================= -->
+    <!-- VERIFIED CANDIDATE -->
+    <!-- ========================================================= -->
+
+    <div class="card border-0 shadow-lg overflow-hidden">
+
+      <!-- Success Header -->
+      <div class="card-header bg-success text-white border-0 p-4">
+
+        <div class="d-flex align-items-center gap-3">
+
+          <div
+            class="d-flex align-items-center justify-content-center bg-white bg-opacity-25 rounded-circle flex-shrink-0"
+            style="width: 52px; height: 52px;"
+          >
+            <i class="bi bi-check-lg fs-4"></i>
+          </div>
+
+          <div>
+            <h4 class="fw-bold mb-1">
+              Candidate Verified
+            </h4>
+
+            <p class="mb-0 text-white-50">
+              Your roll number has been successfully validated.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-body p-4 p-md-5">
+
+        <!-- Candidate Identity -->
+        <div class="text-center mb-4">
+
+          <div
+            class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3"
+            style="width: 76px; height: 76px;"
+          >
+            <i class="bi bi-person-fill fs-2"></i>
+          </div>
+
+          <h3 class="fw-bold mb-1">
+            {{ form_data.name }}
+          </h3>
+
+          <p class="text-muted mb-0">
+            {{ form_data.roll_number }}
+          </p>
+
+        </div>
+
+
+        <!-- Candidate Information -->
+        <div class="row g-3 mb-4">
+
+          <div class="col-md-6">
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="text-muted small mb-1">
+                <i class="bi bi-building me-1"></i>
+                College
+              </div>
+
+              <div class="fw-semibold">
+                {{ decoded_info.college }}
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="text-muted small mb-1">
+                <i class="bi bi-calendar3 me-1"></i>
+                Admission Year
+              </div>
+
+              <div class="fw-semibold">
+                {{ decoded_info.admission_year }}
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="text-muted small mb-1">
+                <i class="bi bi-diagram-3 me-1"></i>
+                Branch
+              </div>
+
+              <div class="fw-semibold">
+                {{ decoded_info.branch }}
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+            <div class="border rounded-3 p-3 h-100">
+
+              <div class="text-muted small mb-1">
+                <i class="bi bi-person-workspace me-1"></i>
+                Entry Type
+              </div>
+
+              <div class="fw-semibold">
+                {{ decoded_info.entry_type }}
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="col-12">
+            <div class="border rounded-3 p-3">
+
+              <div class="text-muted small mb-1">
+                <i class="bi bi-fingerprint me-1"></i>
+                Student Identifier
+              </div>
+
+              <div class="fw-semibold font-monospace">
+                {{ decoded_info.student_identifier }}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Confirmation Notice -->
+        <div class="alert alert-success border-0 d-flex gap-3 align-items-start mb-4">
+
+          <i class="bi bi-shield-check fs-4"></i>
+
+          <div>
+            <div class="fw-semibold">
+              Details verified successfully
+            </div>
+
+            <div class="small">
+              Please confirm these details before proceeding to
+              examination configuration.
+            </div>
+          </div>
+
+        </div>
+
+
+        <!-- Confirm Form -->
+        <form method="POST">
+
+          <input
+            type="hidden"
+            name="action"
+            value="confirm"
+          >
+
+          <input
+            type="hidden"
+            name="name"
+            value="{{ form_data.name }}"
+          >
+
+          <input
+            type="hidden"
+            name="roll_number"
+            value="{{ form_data.roll_number }}"
+          >
+
+          <input
+            type="hidden"
+            name="section"
+            value="{{ form_data.section }}"
+          >
+
+          <input
+            type="hidden"
+            name="admission_year"
+            value="{{ decoded_info.admission_year }}"
+          >
+
+          <input
+            type="hidden"
+            name="college"
+            value="{{ decoded_info.college }}"
+          >
+
+          <input
+            type="hidden"
+            name="entry_type"
+            value="{{ decoded_info.entry_type }}"
+          >
+
+          <input
+            type="hidden"
+            name="branch"
+            value="{{ decoded_info.branch }}"
+          >
+
+          <input
+            type="hidden"
+            name="student_identifier"
+            value="{{ decoded_info.student_identifier }}"
+          >
+
+
+          <div class="d-flex flex-column flex-sm-row gap-3">
+
+            <a
+              href="{{ url_for('main.candidate') }}"
+              class="btn btn-outline-secondary btn-lg flex-fill"
+            >
+              <i class="bi bi-arrow-left me-2"></i>
+              Edit Details
+            </a>
+
+            <button
+              type="submit"
+              class="btn btn-success btn-lg flex-fill"
+            >
+              Confirm & Continue
+              <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    {% else %}
+
+    <!-- ========================================================= -->
+    <!-- CANDIDATE FORM -->
+    <!-- ========================================================= -->
+
+    <div class="row g-4">
+
+      <!-- Registration Form -->
+      <div class="col-lg-7">
+
+        <div class="card border-0 shadow-sm h-100">
+
+          <div class="card-body p-4 p-md-5">
+
+            <div class="d-flex align-items-center gap-3 mb-4">
+
+              <div
+                class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-3"
+                style="width: 52px; height: 52px;"
+              >
+                <i class="bi bi-person-plus-fill fs-4"></i>
+              </div>
+
+              <div>
+                <h4 class="fw-bold mb-1">
+                  Candidate Information
+                </h4>
+
+                <p class="text-muted small mb-0">
+                  Enter your examination details below.
+                </p>
+              </div>
+
+            </div>
+
+
+            <form method="POST">
+
+              <input
+                type="hidden"
+                name="action"
+                value="decode"
+              >
+
+
+              <!-- Name -->
+              <div class="mb-4">
+
+                <label
+                  for="name"
+                  class="form-label fw-semibold"
+                >
+                  Full Name
+                </label>
+
+                <div class="input-group input-group-lg">
+
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-person"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    value="{{ form_data.name }}"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                  >
+
+                </div>
+
+              </div>
+
+
+              <!-- Roll Number -->
+              <div class="mb-4">
+
+                <label
+                  for="roll_number"
+                  class="form-label fw-semibold"
+                >
+                  Roll Number
+                </label>
+
+                <div class="input-group input-group-lg">
+
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-card-text"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    class="form-control text-uppercase"
+                    id="roll_number"
+                    name="roll_number"
+                    value="{{ form_data.roll_number }}"
+                    placeholder="Enter your roll number"
+                    autocomplete="off"
+                    required
+                  >
+
+                </div>
+
+                <div class="form-text">
+                  <i class="bi bi-info-circle me-1"></i>
+                  Enter your official college roll number.
+                </div>
+
+              </div>
+
+
+              <!-- Section -->
+              <div class="mb-4">
+
+                <label
+                  for="section"
+                  class="form-label fw-semibold"
+                >
+                  Section
+                </label>
+
+                <div class="input-group input-group-lg">
+
+                  <span class="input-group-text bg-light">
+                    <i class="bi bi-people"></i>
+                  </span>
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="section"
+                    name="section"
+                    value="{{ form_data.section }}"
+                    placeholder="Example: A"
+                    required
+                  >
+
+                </div>
+
+              </div>
+
+
+              <!-- Submit -->
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg w-100 shadow-sm"
+              >
+                <i class="bi bi-search me-2"></i>
+                Validate Candidate
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Information Panel -->
+      <div class="col-lg-5">
+
+        <div class="card border-0 bg-dark text-white shadow-sm h-100">
+
+          <div class="card-body p-4 p-md-5">
+
+            <div
+              class="d-flex align-items-center justify-content-center bg-primary rounded-4 mb-4"
+              style="width: 64px; height: 64px;"
+            >
+              <i class="bi bi-shield-lock-fill fs-3"></i>
+            </div>
+
+            <h4 class="fw-bold mb-3">
+              Before You Continue
+            </h4>
+
+            <p class="text-white-50">
+              Make sure the information you enter matches your official
+              examination records.
+            </p>
+
+
+            <div class="mt-4">
+
+              <div class="d-flex gap-3 mb-4">
+
+                <div class="text-primary">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <div>
+                  <div class="fw-semibold">
+                    Use your official name
+                  </div>
+
+                  <div class="small text-white-50">
+                    Enter your registered candidate name.
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="d-flex gap-3 mb-4">
+
+                <div class="text-primary">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <div>
+                  <div class="fw-semibold">
+                    Verify your roll number
+                  </div>
+
+                  <div class="small text-white-50">
+                    Your roll number is used to identify your candidate
+                    information.
+                  </div>
+                </div>
+
+              </div>
+
+
+              <div class="d-flex gap-3">
+
+                <div class="text-primary">
+                  <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <div>
+                  <div class="fw-semibold">
+                    Check your section
+                  </div>
+
+                  <div class="small text-white-50">
+                    Select or enter the section assigned to you.
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="border-top border-secondary mt-5 pt-4">
+
+              <div class="d-flex align-items-center gap-2 text-white-50 small">
+                <i class="bi bi-lock-fill"></i>
+                Your examination session is managed securely by the
+                platform.
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
