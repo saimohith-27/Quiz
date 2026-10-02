@@ -6,7 +6,7 @@ A Flask-based **AI-powered Computer-Based Testing (CBT) platform** that dynamica
 
 ## 🚀 Live Demo
 
-🔗 **Live Demo:** [Add live deployment URL here]( )
+🔗 **Live Demo:** [Live at (click)](quizgui.dpdns.org)
 
 ---
 
